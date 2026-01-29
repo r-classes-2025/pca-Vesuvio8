@@ -1,4 +1,10 @@
-# установите и загрузите пакеты
+
+# 3. Коммитим
+git add assignment.R
+git commit -m "Исправление кода в assignment.R"
+
+# 4. Пушим
+git push origin main# установите и загрузите пакеты
 
 library(friends)
 library(tidyverse)
@@ -62,7 +68,11 @@ km.out$cluster
 
 # 6. примените к матрице метод главных компонент (prcomp)
 # центрируйте и стандартизируйте, использовав аргументы функции
-pca_fit <- # ваш код здесь
+pca_fit <- prcomp(friends_tf_wide, center = TRUE, scale. = TRUE)
+names(pca_fit)
+
+pca_fit$x[,1:2]
+
 
 # 7. Покажите наблюдения и переменные вместе (биплот)
 # в качестве геома используйте текст (=имя персонажа)
@@ -70,7 +80,15 @@ pca_fit <- # ваш код здесь
 # отберите 20 наиболее значимых переменных (по косинусу, см. документацию к функции)
 # сохраните график как переменную q
 
-q <- # ваш код здесь
+q <- fviz_pca_biplot(pca_fit,  geom = c("text"),
+                     select.var = list(cos2 = 20),
+                     habillage = as.factor(km.out$cluster),
+                     col.var = "steelblue",
+                     alpha.var = 0.3,
+                     repel = TRUE,
+                     ggtheme = theme_minimal()) +
+  theme(legend.position = "none")
+  print(q)
 
 
 # Последнее обновление: Wed Jan 28 01:04:07 MSK 2026
