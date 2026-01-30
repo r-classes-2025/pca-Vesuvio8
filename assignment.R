@@ -3,7 +3,6 @@ library(tidyverse)
 library(tidytext)
 library(factoextra) 
 
-
 # 1. отберите 6 главных персонажей (по количеству реплик)
 # сохраните как символьный вектор
 top_speakers <- friends |> 
@@ -11,7 +10,7 @@ top_speakers <- friends |>
   slice_head(n = 6) |> 
   pull(speaker) |> 
   as.character() 
-  
+
 # 2. отфильтруйте топ-спикеров, 
 # токенизируйте их реплики, удалите из них цифры
 # столбец с токенами должен называться word
