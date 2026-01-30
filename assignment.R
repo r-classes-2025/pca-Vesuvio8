@@ -39,13 +39,13 @@ friends_tf <- friends_tokens |>
 # 4. преобразуйте в широкий формат; 
 # столбец c именем спикера превратите в имя ряда, используя подходящую функцию 
 friends_tf_wide <- friends_tf |> 
-  pivot_wider(names_from = "word", 
+pivot_wider(names_from = "word", 
               values_from = "tf", 
               values_fill = 0)
 
 friends_tf_wide
 friends_tf_wide <- friends_tf_wide |> 
-  column_to_rownames(var = "speaker")
+column_to_rownames(var = "speaker")
 
 # 5. установите зерно 123
 # проведите кластеризацию k-means (k = 3) на относительных значениях частотности (nstart = 20)
