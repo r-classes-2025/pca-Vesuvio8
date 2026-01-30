@@ -27,9 +27,8 @@ friends_tokens <- friends |>
 # посчитайте относительные частотности для слов
 friends_tf <- friends_tokens |>
   count(speaker, word, name = "n") |> 
-  group_by(speaker) |> 
-  arrange(desc(n)) |>  
-  slice_head(n = 500) |>  
+  group_by(speaker) |>   
+  slice_max(n, n = 500, with_ties = FALSE) |>  
   mutate(
     total_words = sum(n),          
     tf = n / total_words) |>  
