@@ -25,16 +25,16 @@ friends_tokens <- friends |>
 
 # 3. отберите по 500 самых частотных слов для каждого персонажа
 # посчитайте относительные частотности для слов
-friends_tf <- friends_tokens |>
-  count(speaker, word, name = "n") |> 
-  group_by(speaker) |>   
-  slice_max(n, n = 500, with_ties = FALSE) |>  
-  mutate(
-    total_words = sum(n),          
-    tf = n / total_words) |>  
-  ungroup() |> 
-  arrange(speaker) |> 
-  select(speaker, word, tf)
+word_counts <- friends |> 
+  unnest_tokens(word, text) |> 
+  mutate(word = str_remove_all(word, "\\d")) |>  
+  filter(word != "") |> 
+  count(season, episode, word, name = "n") |> 
+  group_by(season, episode) |> 
+  arrange(desc(n)) |> 
+  slice_head(n = 500) |> 
+  ungroup()
+
   
 # 4. преобразуйте в широкий формат; 
 # столбец c именем спикера превратите в имя ряда, используя подходящую функцию 
