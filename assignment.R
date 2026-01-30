@@ -1,11 +1,3 @@
-
-# 3. Коммитим
-git add assignment.R
-git commit -m "Исправление кода в assignment.R"
-
-# 4. Пушим
-git push origin main# установите и загрузите пакеты
-
 library(friends)
 library(tidyverse)
 library(tidytext)
@@ -52,7 +44,6 @@ friends_tf_wide <- friends_tf |>
               values_fill = 0)
 
 friends_tf_wide
-
 friends_tf_wide <- friends_tf_wide |> 
   column_to_rownames(var = "speaker")
 
@@ -62,7 +53,6 @@ friends_tf_wide <- friends_tf_wide |>
 
 set.seed(123)
 km.out <- kmeans(scale(friends_tf_wide), centers = 3, nstart = 20)
-
 km.out$cluster
 
 
@@ -70,7 +60,6 @@ km.out$cluster
 # центрируйте и стандартизируйте, использовав аргументы функции
 pca_fit <- prcomp(friends_tf_wide, center = TRUE, scale. = TRUE)
 names(pca_fit)
-
 pca_fit$x[,1:2]
 
 
